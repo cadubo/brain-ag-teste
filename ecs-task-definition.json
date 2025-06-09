@@ -1,0 +1,43 @@
+{
+  "family": "flask-api-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "containerDefinitions": [
+    {
+      "name": "flask",
+      "image": "<YOUR_FLASK_IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "SQLALCHEMY_DATABASE_URI",
+          "value": "postgresql://username:password@<RDS_ENDPOINT>:5432/dbname"
+        }
+      ]
+    },
+    {
+      "name": "nginx",
+      "image": "<YOUR_NGINX_IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "dependsOn": [
+        {
+          "containerName": "flask",
+          "condition": "START"
+        }
+      ]
+    }
+  ]
+}

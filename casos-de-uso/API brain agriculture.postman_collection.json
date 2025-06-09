@@ -1,0 +1,1446 @@
+{
+	"info": {
+		"_postman_id": "e1583ac0-d70f-48b4-a1fa-8e36db1fce82",
+		"name": "API brain agriculture",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45666965",
+		"_collection_link": "https://carloseduardo-2367360.postman.co/workspace/86238278-3af0-456f-8321-6c2e4e211e40/collection/45666965-e1583ac0-d70f-48b4-a1fa-8e36db1fce82?action=share&source=collection_link&creator=45666965"
+	},
+	"item": [
+		{
+			"name": "Produtores",
+			"item": [
+				{
+					"name": "Get Produtores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response schema validation for expected fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('produtores');",
+									"    ",
+									"    pm.expect(responseData.produtores).to.be.an('array');",
+									"    responseData.produtores.forEach(function(produtor) {",
+									"        pm.expect(produtor).to.be.an('object');",
+									"        pm.expect(produtor).to.have.all.keys('id', 'name', 'email', 'age');",
+									"        ",
+									"        pm.expect(produtor.id).to.be.a('number');",
+									"        pm.expect(produtor.name).to.be.a('string').that.is.not.empty;",
+									"        pm.expect(produtor.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+									"        pm.expect(produtor.age).to.be.a('number');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response is an array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('array');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Each item in the array has a non-empty 'name' field\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+									"    responseData.forEach(function(item) {",
+									"        pm.expect(item).to.have.property('name').that.is.a('string').and.to.have.lengthOf.at.least(1, \"Name field should not be empty\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtores",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Produtores",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtores",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtores"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Get Produtor by CPF_CNPJ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf_cnpj14\": \"35362460870\",\n    \"tipo_Produtor\": \"PF\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/produtores",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"produtores"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Cadastro Produtor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf_cnpj14\": \"\",\n    \"nome_Produtor\": \"\",\n    \"tipo_Produtor\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtores",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cadastro Produtor",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf_cnpj14\": \"35362460870\",\n    \"nome_Produtor\": \"Carlos Eduardo\",\n    \"tipo_Produtor\": \"PF\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtores",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtores"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar Cadastro Produtor",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf_cnpj14\": \"\",\n    \"nome_Produtor\": \"\",\n    \"tipo_Produtor\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtores",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alterar Cadastro Produtor",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf_cnpj14\": \"35362460870\",\n    \"nome_Produtor\": \"Carlos Eduardo Oliveira\",\n    \"tipo_Produtor\": \"PF\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtores",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtores"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Deletar Cadastro Produtor",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf_cnpj14\": \"\",\n    \"tipo_Produtor\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtores",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Deletar Cadastro Produtor",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf_cnpj14\": \"35362460870\",\n    \"tipo_Produtor\": \"PF\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtores",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtores"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Get Produtos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtos",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Produto pelo Nome",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_produto\": \"Milho\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Get All Produtos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_produto\": \"Milho\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/produtos",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Cadastro Produtos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome_produto\": \"\",\n    \"descricao\": \"\",\n    \"categoria\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtos",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cadastro Produtos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_produto\": \"Milho\",\n    \"descricao\": \"Saco de Milho\",\n    \"categoria\": \"Grãos\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar Produtos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome_produto\": \"\",\n    \"descricao\": \"\",\n    \"categoria\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtos",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alterar Produtos",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_produto\": \"Milho\",\n    \"descricao\": \"Saco de Milho\",\n    \"categoria\": \"Grãos\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Deletar Produtos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome_produto\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/produtos",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Deletar Produtos",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_produto\": \"Milho\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/produtos",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Propriedades",
+			"item": [
+				{
+					"name": "Get Propriedades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/propriedades",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"propriedades"
+							],
+							"query": [
+								{
+									"key": "produtor_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "cidade_Propriedade",
+									"value": "Jundiai",
+									"disabled": true
+								},
+								{
+									"key": "estado_Propriedade",
+									"value": "São Paulo",
+									"disabled": true
+								},
+								{
+									"key": "area_total_min",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "area_total_max",
+									"value": "1000000",
+									"disabled": true
+								},
+								{
+									"key": "area_agriculturavel_min",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "area_agriculturavel_max",
+									"value": "1000000",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Filtrar Propriedades",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5002/propriedades?produtor_id=1&cidade_Propriedade=Jundiai&estado_Propriedade=São Paulo&area_total_min=0&area_total_max=1000000&area_agriculturavel_min=0&area_agriculturavel_max=1000000&limit=1&offset=0",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"propriedades"
+									],
+									"query": [
+										{
+											"key": "produtor_id",
+											"value": "1"
+										},
+										{
+											"key": "cidade_Propriedade",
+											"value": "Jundiai"
+										},
+										{
+											"key": "estado_Propriedade",
+											"value": "São Paulo"
+										},
+										{
+											"key": "area_total_min",
+											"value": "0"
+										},
+										{
+											"key": "area_total_max",
+											"value": "1000000"
+										},
+										{
+											"key": "area_agriculturavel_min",
+											"value": "0"
+										},
+										{
+											"key": "area_agriculturavel_max",
+											"value": "1000000"
+										},
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Get All Propriedades",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/propriedades",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"propriedades"
+									],
+									"query": [
+										{
+											"key": "produtor_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "cidade_Propriedade",
+											"value": "Jundiai",
+											"disabled": true
+										},
+										{
+											"key": "estado_Propriedade",
+											"value": "São Paulo",
+											"disabled": true
+										},
+										{
+											"key": "area_total_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "area_total_max",
+											"value": "1000000",
+											"disabled": true
+										},
+										{
+											"key": "area_agriculturavel_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "area_agriculturavel_max",
+											"value": "1000000",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Cadastro Propriedade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"produtor_id\": 0,\n    \"nome_Propriedade\": \"\",\n    \"cidade_Propriedade\": \"\",\n    \"estado_Propriedade\": \"\",\n    \"area_total_Propriedade\": 0,\n    \"area_vegetacao_Propriedade\": 0,\n    \"area_agriculturavel_Propriedade\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/propriedades",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"propriedades"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cadastro Propriedade",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produtor_id\": 1,\n    \"nome_Propriedade\": \"Carlos SP45\",\n    \"cidade_Propriedade\": \"Jundiai\",\n    \"estado_Propriedade\": \"São Paulo\",\n    \"area_total_Propriedade\": 1000,\n    \"area_vegetacao_Propriedade\": 500,\n    \"area_agriculturavel_Propriedade\": 500\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/propriedades",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"propriedades"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar Propriedade",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"produtor_id\": 0,\n    \"nome_Propriedade\": \"\",\n    \"cidade_Propriedade\": \"\",\n    \"estado_Propriedade\": \"\",\n    \"area_total_Propriedade\": 0,\n    \"area_vegetacao_Propriedade\": 0,\n    \"area_agriculturavel_Propriedade\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/propriedades",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"propriedades"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alterar Propriedade",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produtor_id\": 1,\n    \"nome_Propriedade\": \"Carlos SP45\",\n    \"cidade_Propriedade\": \"São Paulo\",\n    \"estado_Propriedade\": \"São Paulo\",\n    \"area_total_Propriedade\": 1000,\n    \"area_vegetacao_Propriedade\": 400,\n    \"area_agriculturavel_Propriedade\": 500\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/propriedades",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"propriedades"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Deletar Propriedade",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome_Propriedade\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/propriedades",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"propriedades"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Deletar Propriedade",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome_Propriedade\": \"Carlos SP45\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/propriedades",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"propriedades"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Safras",
+			"item": [
+				{
+					"name": "Get Safras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/safras?safra_id=1&propriedade_id=1&produtor_id=1&safra_produto_id=1&safra_ano_min=0&safra_ano_max=3000&safra_area_min=0&safra_area_max=1000000&safra_producao_min=0&safra_producao_max=1000000&safra_rendimento_min=0&safra_rendimento_max=1000000&limit=50&offset=0",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"safras"
+							],
+							"query": [
+								{
+									"key": "safra_id",
+									"value": "1"
+								},
+								{
+									"key": "propriedade_id",
+									"value": "1"
+								},
+								{
+									"key": "produtor_id",
+									"value": "1"
+								},
+								{
+									"key": "safra_produto_id",
+									"value": "1"
+								},
+								{
+									"key": "safra_ano_min",
+									"value": "0"
+								},
+								{
+									"key": "safra_ano_max",
+									"value": "3000"
+								},
+								{
+									"key": "safra_area_min",
+									"value": "0"
+								},
+								{
+									"key": "safra_area_max",
+									"value": "1000000"
+								},
+								{
+									"key": "safra_producao_min",
+									"value": "0"
+								},
+								{
+									"key": "safra_producao_max",
+									"value": "1000000"
+								},
+								{
+									"key": "safra_rendimento_min",
+									"value": "0"
+								},
+								{
+									"key": "safra_rendimento_max",
+									"value": "1000000"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Filtrar Safra",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/safras?safra_id=1&propriedade_id=1&produtor_id=1&safra_produto_id=1&safra_ano_min=0&safra_ano_max=3000&safra_area_min=0&safra_area_max=1000000&safra_producao_min=0&safra_producao_max=1000000&safra_rendimento_min=0&safra_rendimento_max=1000000&limit=50&offset=0",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"safras"
+									],
+									"query": [
+										{
+											"key": "safra_id",
+											"value": "1"
+										},
+										{
+											"key": "propriedade_id",
+											"value": "1"
+										},
+										{
+											"key": "produtor_id",
+											"value": "1"
+										},
+										{
+											"key": "safra_produto_id",
+											"value": "1"
+										},
+										{
+											"key": "safra_ano_min",
+											"value": "0"
+										},
+										{
+											"key": "safra_ano_max",
+											"value": "3000"
+										},
+										{
+											"key": "safra_area_min",
+											"value": "0"
+										},
+										{
+											"key": "safra_area_max",
+											"value": "1000000"
+										},
+										{
+											"key": "safra_producao_min",
+											"value": "0"
+										},
+										{
+											"key": "safra_producao_max",
+											"value": "1000000"
+										},
+										{
+											"key": "safra_rendimento_min",
+											"value": "0"
+										},
+										{
+											"key": "safra_rendimento_max",
+											"value": "1000000"
+										},
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Get All Safras",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/safras",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"safras"
+									],
+									"query": [
+										{
+											"key": "safra_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "propriedade_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "produtor_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "safra_produto_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "safra_ano_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "safra_ano_max",
+											"value": "3000",
+											"disabled": true
+										},
+										{
+											"key": "safra_area_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "safra_area_max",
+											"value": "1000000",
+											"disabled": true
+										},
+										{
+											"key": "safra_producao_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "safra_producao_max",
+											"value": "1000000",
+											"disabled": true
+										},
+										{
+											"key": "safra_rendimento_min",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "safra_rendimento_max",
+											"value": "1000000",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "50",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Criar Safra",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"propriedade_id\": 1,\n        \"produtor_id\": 1,\n        \"safra_produto_id\": 1,\n        \"safra_ano\": 2015,\n        \"safra_area\": 500,\n        \"safra_producao\": 500,\n        \"safra_rendimento\": 500\n    }"
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/safras",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"safras"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Safra",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"propriedade_id\": 1,\n        \"produtor_id\": 1,\n        \"safra_produto_id\": 1,\n        \"safra_ano\": 2015,\n        \"safra_area\": 500,\n        \"safra_producao\": 500,\n        \"safra_rendimento\": 500\n    }"
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/safras",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"safras"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Alterar Safra",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"safra_id\" : 1,\n        \"propriedade_id\": 1,\n        \"produtor_id\": 1,\n        \"safra_produto_id\": 1,\n        \"safra_ano\": 2016,\n        \"safra_area\": 500,\n        \"safra_producao\": 500,\n        \"safra_rendimento\": 500\n    }"
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/safras",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"safras"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alterar Safra",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"safra_id\" : 1,\n        \"propriedade_id\": 1,\n        \"produtor_id\": 1,\n        \"safra_produto_id\": 1,\n        \"safra_ano\": 2016,\n        \"safra_area\": 500,\n        \"safra_producao\": 500,\n        \"safra_rendimento\": 500\n    }"
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/safras",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"safras"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Deletar Safra",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"safra_id\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}:{{Porta}}/safras",
+							"host": [
+								"{{URL}}"
+							],
+							"port": "{{Porta}}",
+							"path": [
+								"safras"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Deletar Safra",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"safra_id\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}:{{Porta}}/safras",
+									"host": [
+										"{{URL}}"
+									],
+									"port": "{{Porta}}",
+									"path": [
+										"safras"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}
